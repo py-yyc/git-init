@@ -1,0 +1,10 @@
+= Introduction
+
+= Using git
+
+= Digging deeper
+
+- Used to use Mercurial
+- Mention O’Reilly book
+
+= Conclusion
