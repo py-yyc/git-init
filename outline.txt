@@ -1,10 +1,96 @@
 = Introduction
 
-= Using git
+= Version Control
+
+Basics of version control
+- Tracking who made what changes, when, and why, gets very complicated
+- [Excel icon] budget.q4updated.final_FINAL_with_fixes_from_jim.xls
+- [Python logo] Imagine website.beta2.final_FINAL_with_bug_fix_from_susan.py,
+  distributed by email :(
+
+Wouldn’t it be nice if computers tracked that automatically?
+- [Screenshots of github for everything here]
+- Commit log
+- Commit details
+- Tags attached to commits
+- Blame
+
+Is it worth it?
+- Indispensable when working with others: automatic merges
+- Useful even if the only other people working on the project are past
+  you and future you
+- The code was working 10 minutes ago. What did I just change?
+- Check older versions to see if the bug was always there, or you
+  accidentally added it last week
+
+= Version control with git
+
+To use Github, you have to use git
+Can get very complicated very quickly
+- Used to use Mercurial
+- Found git ridiculously complicated
+- Started a job that used git
+- Worked through O’Reilly book
+
+Basic config
+- name and email
+- show diff in git commit screen
+
+Walk through the basics
+- git init
+- git add
+- git status
+- git commit
+  - how to cancel
+  - Keep subject <= 50 chars: https://git-scm.com/docs/git-commit#_discussion
+- git log to check that the change is there
+If you want to use the web interface for everything:
+- git remote add
+- git push
+- SSH keys are convenient
+
+Working with friends
+- demo giving Mike write access to something
+- git pull [--ff-only] [--rebase]
+- how to escape from a merge
+- fixing merge conflicts
+
+Working with strangers
+- you don’t have direct write access, so make your own copy
+- commit changes
+- compare
+- submit pull request
+- be prepared to deal with jerks; this is the software industry
+
+Getting out of trouble
+- commit before doing anything that might get messy
+- it’s always safe to commit your changes
+- reflog
+- git reset --hard
 
 = Digging deeper
 
-- Used to use Mercurial
-- Mention O’Reilly book
+blobs, trees, and cat-file -p
+using ^ to compute a commit SHA by hand for a hello-world repo
 
 = Conclusion
+
+Exercises:
+  - Install git
+  - Create a new repo locally
+  - Check out the repo for this presentation on github
+  - Make a change
+  - Send the change in a pull request
+  - Mike and I will pretend to be strangers, and will merge your PRs
+
+  * * *
+
+Things we’re not covering:
+
+[ ] continuous integration
+[ ] rebasing
+
+Other ideas:
+
+[ ] fast-import magic
+
