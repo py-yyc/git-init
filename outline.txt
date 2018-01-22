@@ -44,6 +44,8 @@ Walk through the basics
   - how to cancel
   - Keep subject <= 50 chars: https://git-scm.com/docs/git-commit#_discussion
 - git log to check that the change is there
+- the version number is a magic, abbreviatable string called a Commit SHA
+- we’ll get into that more later
 If you want to use the web interface for everything:
 - git remote add
 - git push
@@ -69,6 +71,11 @@ Getting out of trouble
 - git reset --hard
 
 = Digging deeper
+
+The version number is not a number
+no way to assign a linear sequence of version numbers
+when many people could be simultaneously making commits offline
+and pushing them all to the same place
 
 blobs, trees, and cat-file -p
 using ^ to compute a commit SHA by hand for a hello-world repo
