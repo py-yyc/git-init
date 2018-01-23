@@ -13,8 +13,7 @@ import time
 import tokenize
 
 # Not used by this script, but allows snippets to skip the import
-import datetime
-import pendulum
+from tempfile import TemporaryDirectory
 
 try:
     last_t_type = None

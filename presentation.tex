@@ -14,9 +14,9 @@
 
 \usepackage{fontspec}
 
-\hypersetup{hidelinks,pdfpagemode=}
+\hypersetup{pdfpagemode=,colorlinks=true,urlcolor=blue}
 
-\urlstyle{same}
+%\urlstyle{same}
 
 \newcommand*{\sizefont}[1]{%
     \ifcase#1\relax
@@ -100,11 +100,14 @@
 \tableofcontents
 \end{frame}
 
-\section{Introduction}
+\section{Version control}
 
 \def\fillinblank{\_\_\_\_}
 
-\begin{frame}{Version control}
+\begin{frame}{Basics of version control}
+\begin{itemize}
+\item Tracking who made what changes, when, and why, gets very complicated
+\end{itemize}
 \end{frame}
 
 % \begin{frame}
@@ -121,7 +124,40 @@ git --version
 \END
 \end{frame}
 
+\section{Version control with git}
+
+\section{Digging deeper}
+
+\begin{frame}
+\begin{itemize}
+\item \texttt{git cat-file -p \textit{thing}}
+\item \texttt{\detokenize{git cat-file -p HEAD^{tree}}}
+\item \texttt{git cat-file tree \textit{hash} | hexdump -C}
+\end{itemize}
+
+% https://git-scm.com/book/en/v2/Git-Internals-Git-Objects
+
+\end{frame}
+
+\section{Conclusion}
+
 \begin{frame}{Conclusion}
+\end{frame}
+
+\section{Exercises}
+
+\begin{frame}{Exercises}
+\begin{itemize}
+\item Install git
+\item Create a new repo locally and commit some changes
+\item Check out \href{https://github.com/py-yyc/git-init}{github.com/py-yyc/git-init}
+\item Send a pull request with your change
+\end{itemize}
+Advanced:
+\begin{itemize}
+\item Extend the hash-computing code to work with directories and multiple
+commits
+\end{itemize}
 \end{frame}
 
 \end{document}

@@ -54,3 +54,13 @@ presentation.pdf: $(PYTHON_FILES:%.py=%.py.include)
 
 clean::
 	rm -f *.out *.include
+
+GH_CURL = curl -sSH "Authorization: token $$(grep oauth_token ~/.config/hub  | head -n1 | awk '{print $$2}')"
+
+upload: presentation.pdf
+	EXISTING_RELEASE_ID=$$(${GH_CURL} https://api.github.com/repos/py-yyc/git-init/releases/tags/v0.0.0 | jq .id); \
+	if [ -n "$$EXISTING_RELEASE_ID" ]; then \
+	    ${GH_CURL} -X DELETE https://api.github.com/repos/py-yyc/git-init/releases/$$EXISTING_RELEASE_ID; \
+	fi
+	hub release create -p -a presentation.pdf -m Slides v0.0.0
+
