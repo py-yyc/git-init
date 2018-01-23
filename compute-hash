@@ -4,20 +4,12 @@ import os
 import sys
 import time
 from hashlib import sha1
-from subprocess import check_call
+from fake_git import check_call, commit_metadata
 from tempfile import TemporaryDirectory
 
 os.environ['GIT_PAGER'] = ''
 
 commit_message = 'Add foo'
-commit_metadata = {
-    'name': 'Andrew',
-    'email': 'andrew@example.org',
-    'date': time.strftime('%s %z')
-}
-git_env = {('GIT_%s_%s' % (who.upper(), what.upper()), value)
-        for who in ['author', 'committer']
-           for what, value in commit_metadata.items()}
 
 def hash(object_type, contents):
     return sha1(b'%s %d\0%s' % (object_type, len(contents), contents))
@@ -51,7 +43,5 @@ with TemporaryDirectory() as t:
     check_call(['git', 'init'])
     check_call(['git', 'add', 'foo'])
 
-    env = os.environ.copy()
-    env.update(git_env)
-    check_call(['git', 'commit', '-m', commit_message], env=env)
+    check_call(['git', 'commit', '-m', commit_message])
     check_call(['git', 'log', '-m', 'foo'])

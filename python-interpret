@@ -18,10 +18,6 @@ from tempfile import TemporaryDirectory
 try:
     last_t_type = None
     code_tokens = []
-    symbol_table = {
-        "datetime": datetime,
-        "pendulum": pendulum
-    }
     for t in tokenize.generate_tokens(sys.stdin.readline):
         if len(code_tokens) == 0 and t.type == tokenize.DEDENT:
             continue

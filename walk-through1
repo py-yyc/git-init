@@ -1,0 +1,7 @@
+git init
+echo hi > foo
+git status
+git add foo
+git status
+git commit -m 'Add foo'
+git log -p

@@ -43,21 +43,13 @@ PYTHON_FILES = $(wildcard *.py)
 
 presentation.pdf: $(PYTHON_FILES:%.py=%.py.include)
 
-%.py.include: %.py ./python-interpret
-	echo -n > $@
-	echo '\begin{verbatim}' >> $@
-	./python-interpret < $*.py >> $@
-	echo '\end{verbatim}' >> $@
-
-%.py.out: %.py
-	(echo 'import datetime'; cat $<) | python > $@
-
 clean::
 	rm -f *.out *.include
 
 GH_CURL = curl -sSH "Authorization: token $$(grep oauth_token ~/.config/hub  | head -n1 | awk '{print $$2}')"
 
 upload: presentation.pdf
+	git tag -f v0.0.0 && git push -f --tags github.com/py-yyc/git-init
 	EXISTING_RELEASE_ID=$$(${GH_CURL} https://api.github.com/repos/py-yyc/git-init/releases/tags/v0.0.0 | jq .id); \
 	if [ -n "$$EXISTING_RELEASE_ID" ]; then \
 	    ${GH_CURL} -X DELETE https://api.github.com/repos/py-yyc/git-init/releases/$$EXISTING_RELEASE_ID; \

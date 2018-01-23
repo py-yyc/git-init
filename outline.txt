@@ -2,30 +2,50 @@
 
 = Version Control
 
-Basics of version control
-- Tracking who made what changes, when, and why, gets very complicated
-- [Excel icon] budget.q4updated.final_FINAL_with_fixes_from_jim.xls
-- [Python logo] Imagine website.beta2.final_FINAL_with_bug_fix_from_susan.py,
-  distributed by email :(
+What is version control and why should you use it?
 
-Wouldn’t it be nice if computers tracked that automatically?
+Version control:
+  - every code change is a distinct entity called a commit
+    it has an attached record of who made the change, when they made it, and
+    why they said they made the change
+
+Why?
+  - diff: show you what you’ve changed so you can review it
+  - backups: can go back to a known good state if things start crashing,
+    or an idea turns out not to work
+  - undo: can selectively roll back individual changes
+  - history: safely delete code to keep things clean instead of commenting
+    it out, knowing you can get it back later if you want
+  - context: commit messages can explain design decisions, link to bug
+    reports
+  - merges: if you make unrelated changes to different files, the version
+    control system will merge them instead
+  - fast way of sharing code: syncing with someone else only requires
+    transmitting recent changes, not the complete source code
+  - annotate: show who originally wrote the code, or changed it recently,
+    so you know can ask them for help
+  - bisect: find source of bugs by checking different versions to see when
+    the bug first shows up
+
+A nice orderly way of storing and managing source code
+whose only real competitor is complete chaos
+
+- Indispensable when working with others: automatic merges
+- Useful even if the only other people working on the project are past you
+  and future you: the code was working 10 minutes ago. What did I just
+  change?
+
+= Version control with git
+
+GitHub does everything we talked about, in a nice Web UI
 - [Screenshots of github for everything here]
 - Commit log
 - Commit details
 - Tags attached to commits
 - Blame
 
-Is it worth it?
-- Indispensable when working with others: automatic merges
-- Useful even if the only other people working on the project are past
-  you and future you
-- The code was working 10 minutes ago. What did I just change?
-- Check older versions to see if the bug was always there, or you
-  accidentally added it last week
-
-= Version control with git
-
 To use Github, you have to use git
+- Originally written by Linus Torvalds to store linux source code
 Can get very complicated very quickly
 - Used to use Mercurial
 - Found git ridiculously complicated
