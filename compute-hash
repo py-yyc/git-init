@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import time
+from hashlib import sha1
+from subprocess import check_call
+from tempfile import TemporaryDirectory
+
+os.environ['GIT_PAGER'] = ''
+
+commit_message = 'Add foo'
+commit_metadata = {
+    'name': 'Andrew',
+    'email': 'andrew@example.org',
+    'date': time.strftime('%s %z')
+}
+git_env = {('GIT_%s_%s' % (who.upper(), what.upper()), value)
+        for who in ['author', 'committer']
+           for what, value in commit_metadata.items()}
+
+def hash(object_type, contents):
+    return sha1(b'%s %d\0%s' % (object_type, len(contents), contents))
+
+file_hash = hash(b'blob', b'hi\n')
+print(f'file_hash = {file_hash.hexdigest()}')
+
+tree_hash = hash(b'tree', b'100644 foo\0%b' % file_hash.digest())
+print(f'tree_hash = {tree_hash.hexdigest()}')
+
+commit = """tree %s
+author %s <%s> %s
+committer %s <%s> %s
+
+%s
+""" % (tree_hash.hexdigest(),
+    commit_metadata['name'], commit_metadata['email'], commit_metadata['date'],
+    commit_metadata['name'], commit_metadata['email'], commit_metadata['date'],
+    commit_message)
+commit = commit.encode('UTF-8')
+
+commit_hash = hash(b'commit', commit)
+print(f'commit_hash = {commit_hash.hexdigest()}')
+print()
+sys.stdout.flush()
+
+with TemporaryDirectory() as t:
+    os.chdir(t)
+    with open('foo', 'w') as f:
+        f.write('hi\n')
+    check_call(['git', 'init'])
+    check_call(['git', 'add', 'foo'])
+
+    env = os.environ.copy()
+    env.update(git_env)
+    check_call(['git', 'commit', '-m', commit_message], env=env)
+    check_call(['git', 'log', '-m', 'foo'])
