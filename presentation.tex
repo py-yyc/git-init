@@ -181,6 +181,9 @@ The alternative is complete chaos.
 \item Useful even if the only other people working on the project are past you
   and future you\pause\\
   “This was working 10 minutes ago. What did I just change?”
+\pause
+\item This talk: basics of getting started with git, followed by pairing to
+send a pull request
 \end{itemize}
 \end{frame}
 
@@ -190,7 +193,7 @@ The alternative is complete chaos.
 \tableofcontents[currentsection]
 \end{frame}
 
-\begin{frame}{GitHub does all of that with a nice web UI}
+\begin{frame}{GitHub is a nice web view of version control}
 \only<1>{\includegraphics[width=\paperwidth,center]{github-commitlog.png}}
 \only<2>{\includegraphics[width=\paperwidth,center]{github-commitdetails.png}}
 \only<3>{\includegraphics[width=\paperwidth,center]{github-annotate.png}}
@@ -368,7 +371,7 @@ https://github.com/\$you/\$repo.git}
 \pause
 \item \texttt{git push github.com/\$you/\$repo}
 \pause
-\item \sizefont{2} you can use SSH too, but that’s another talk
+\\[\baselineskip] \sizefont{2} you can use SSH too, but that’s another talk
 \end{itemize}
 \end{frame}
 
@@ -461,24 +464,27 @@ impossible
 \href{https://git-scm.com/book/en/v2/Git-Internals-Git-Objects}{https://git-scm.com/book/en/v2/Git-Internals-Git-Objects}
 
 \begin{verbatim}
-$ git rev-parse HEAD
-61c1f88999741f5feae711911b74ee6b21e954cd
-\end{verbatim}
-\pause
-\begin{verbatim}
 $ git cat-file -p 61c1f88999741f5feae711911b74ee6b21e954cd
 tree d5d3ae9b365275c0d3657f4add7a4dbdf960f783
 author Andrew <andrew@example.org> 1515151515 -0700
 committer Andrew <andrew@example.org> 1515151515 -0700
+
+Add foo
 \end{verbatim}
 \pause
 \begin{verbatim}
-Add foo
 $ git cat-file -p d5d3ae9b365275c0d3657f4add7a4dbdf960f783
 100644 blob 45b983be36b73c0788dc9cbcb76cbb80fc7bb057	foo
+\end{verbatim}
+\pause
+\begin{verbatim}
 $ git cat-file -p 45b983be36b73c0788dc9cbcb76cbb80fc7bb057
 hi
 \end{verbatim}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=0.9\paperwidth,center]{data-model-3.png}
 \end{frame}
 
 \begin{frame}[fragile]{Commits, blobs, and trees}
@@ -544,15 +550,15 @@ print(f'commit_hash = {commit_hash.hexdigest()}')
 
 \begin{frame}[fragile]
 \sizefont{2}
+Python:
 \begin{verbatim}
 file_hash = 45b983be36b73c0788dc9cbcb76cbb80fc7bb057
 tree_hash = d5d3ae9b365275c0d3657f4add7a4dbdf960f783
 commit_hash = 61c1f88999741f5feae711911b74ee6b21e954cd
+\end{verbatim}
 
-Initialized empty Git repository in /private/var/folders/z2/fc4547p10xv62mlthqm664640000gp/T/tmplo8y0uve/.git/
-[master (root-commit) 61c1f88] Add foo
- 1 file changed, 1 insertion(+)
- create mode 100644 foo
+git:
+\begin{verbatim}
 commit 61c1f88999741f5feae711911b74ee6b21e954cd (HEAD -> master)
 Author: Andrew <andrew@example.org>
 Date:   Fri Jan 5 04:25:15 2018 -0700
